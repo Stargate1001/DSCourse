@@ -1,0 +1,135 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+#import libraries
+
+df = pd.read_excel('DSCourse_PythonProject.xlsx')
+#ask pandas to read the excel file and use it to create a dataframe
+
+print(df)
+#show the dataframe derived from the excel file
+
+StudentNames = df['StudentNames'].values
+Department = df['Department'].values
+
+for x in StudentNames:
+  print(x)
+#see a full list of students who were in the course
+
+StudentInfo = df[['StudentNames','Department']]
+#merge Student Names and Department 
+
+AnthropologyStudents = df['Department'].str.contains('Anthropology')
+
+for i in range(0,AnthropologyStudents.size):
+    if AnthropologyStudents[i] == True:
+        print(StudentInfo.iloc[i,0], StudentInfo.iloc[i,1])
+    else:
+        pass
+#print list of anthropology students
+     
+
+print('Kathy Jones' in StudentNames)
+#check if a particular student was in the course
+#if the student was not in the couse, the output will be 'false'
+#if the student was in the couse, the output will be 'true'
+
+
+Q1='Knowledge of Research Data Life Cycle'
+Q1Pre = df['Question1_Pre'].values
+Q1Post = df['Question1_Post'].values
+NumStudents = StudentNames.size
+
+df['Q1Difference'] = Q1Post-Q1Pre
+Q1DiffSum = df['Q1Difference'].sum()
+
+def Question1AverageChange():
+  return Q1DiffSum / NumStudents
+#calculates the average change in student scores for question 1
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+#import libraries
+
+df = pd.read_excel('DSCourse_PythonProject.xlsx')
+#ask pandas to read the excel file and use it to create a dataframe
+
+print(df)
+#show the dataframe derived from the excel file
+
+StudentNames = df['StudentNames'].values
+Department = df['Department'].values
+
+for x in StudentNames:
+  print(x)
+#see a full list of students who were in the course
+
+StudentInfo = df[['StudentNames','Department']]
+#merge Student Names and Department 
+
+AnthropologyStudents = df['Department'].str.contains('Anthropology')
+
+for i in range(0,AnthropologyStudents.size):
+    if AnthropologyStudents[i] == True:
+        print(StudentInfo.iloc[i,0], StudentInfo.iloc[i,1])
+    else:
+        pass
+#This where I keep getting stuck. 
+
+print('Seth Horne' in StudentNames)
+#check if a particular student was in the course
+#if the student was not in the course, the output will be 'false'
+#if the student was in the course, the output will be 'true'
+
+Q1='Knowledge of Research Data Life Cycle'
+Q1Pre = df['Question1_Pre'].values
+Q1Post = df['Question1_Post'].values
+NumStudents = StudentNames.size
+
+df['Q1Difference'] = Q1Post-Q1Pre
+Q1DiffSum = df['Q1Difference'].sum()
+
+def Question1AverageChange():
+  return Q1DiffSum / NumStudents
+
+Q1AC=Question1AverageChange()
+print(Q1AC)
+#print average change
+
+Q2='Define Research Data'
+Q2Pre = df['Question2_Pre'].values
+Q2Post = df['Question2_Post'].values
+
+df['Q2Difference'] = Q2Post-Q2Pre
+Q2DiffSum = df['Q2Difference'].sum()
+
+def Question2AverageChange():
+  return Q2DiffSum / NumStudents
+#calculates the average change in student scores for question 2
+#this seems redundant-maybe a function could help?
+
+Q2AC=Question2AverageChange()
+print(Q2AC)
+#print average change
+
+
+fig, ax = plt.subplots()
+ax.scatter(StudentNames, Q1Post, label='Post-Course', s=35)
+ax.scatter(StudentNames, Q1Pre, label='Pre-Course', s=20)
+ax.set_xticks([])
+ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
+ax.set_xlabel('Students')
+ax.set_ylabel('Student Scores')
+ax.set_title(Q1)
+ax.legend()
+plt.show()
+#plots student scores (pre and post course) to question 1
+
+CountPositive = df['Recommendation'].value_counts()['y']
+PercentagePositive = (CountPositive/NumStudents)*100
+print(f"{PercentagePositive}%")
+#calculates the percentage of students who would recommend the course to another student 
+
+
+
